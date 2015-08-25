@@ -33,10 +33,6 @@ angular.module('froala', []).
 			require: 'ngModel',
 			scope: scope,
 			link: function(scope, element, attrs, ngModel) {
-				if(!(element instanceof jQuery)){
-					throw "Froala requires jQuery, are you loading it before Angular?";
-				}
-
 				var defaultOptions = {};
 				var contentChangedCallback;
 				var options = angular.extend({}, froalaConfig, scope.froala);
@@ -120,7 +116,7 @@ angular.module('froala', []).
 
 				// the froala instance to the options object to make methods available in parent scope
 				if(scope.froala){
-					scope.froala.froala = angular.bind(element, $(attrs.id).editable);
+					scope.froala.froala = angular.bind(element, jQuery(attrs.id).editable);
 				}
 
 				scope.$watch('froala', function(n, o){
